@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sri Midhuna S K | AI Engineer</title>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* ==========================
+           1. CSS VARIABLES & RESET
+           ========================== */
+        :root {
+            --bg-color: #0b0d17;
+            --bg-light: #15192b;
+            --primary: #5271ff;
+            --accent: #00d2ff;
+            --text-main: #ffffff;
+            --text-secondary: #a0a6b1;
+            --gradient: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        /* ==========================
+           2. NAVIGATION (CSS ONLY)
+           ========================== */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(11, 13, 23, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .nav-links { display: flex; gap: 30px; }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        /* CSS Checkbox Hack for Mobile Menu */
+        #nav-toggle { display: none; }
+        .menu-icon { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* ==========================
+           3. GENERAL SECTIONS
+           ========================== */
+        section { 
+            padding: 100px 0; 
+            border-bottom: 1px solid rgba(255,255,255,0.02); 
+        }
+
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .section-header span { color: var(--accent); text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; font-weight: bold; }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient);
+            color: #fff;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(82, 113, 255, 0.3); }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Apply animation to content */
+        .animate-load {
+            animation: fadeUp 1s ease-out forwards;
+            opacity: 0; /* Hidden initially */
+            animation-delay: 0.2s;
+        }
+
+        /* ==========================
+           4. HERO SECTION
+           ========================== */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: radial-gradient(circle at 50% 50%, #1a2035 0%, var(--bg-color) 70%);
+            padding-top: 60px;
+        }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.1; }
+        .hero span { color: var(--primary); }
+        .hero p { font-size: 1.1rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 30px; }
+        
+        .social-icons a {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            color: var(--text-secondary);
+            transition: 0.3s;
+        }
+        .social-icons a:hover { color: var(--accent); }
+
+        /* ==========================
+           5. ABOUT ME SECTION
+           ========================== */
+        .about-container { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+        }
+        
+        .about-text { 
+            max-width: 800px; 
+            text-align: center; 
+        }
+        .about-text h3 { font-size: 1.8rem; margin-bottom: 20px; color: var(--accent); }
+        .about-text p { color: var(--text-secondary); margin-bottom: 15px; line-height: 1.8; font-size: 1rem; }
+        
+        .stats { 
+            display: flex; 
+            gap: 40px; 
+            margin-bottom: 30px; 
+            margin-top: 30px; 
+            justify-content: center; 
+        }
+        .stat-box h4 { font-size: 2.5rem; color: var(--primary); margin-bottom: 0;}
+        .stat-box p { font-size: 0.9rem; color: var(--text-secondary); margin: 0;}
+
+        /* ==========================
+           6. SKILLS GRID (CSS ANIMATION)
+           ========================== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 20px;
+            width: 100%;
+        }
+
+        .skill-card {
+            background: var(--bg-light);
+            padding: 25px 15px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.3s;
+            opacity: 0; /* Start hidden */
+            transform: translateY(20px);
+            /* Standard CSS Animation running on page load */
+            animation: fadeUp 0.6s ease-out forwards;
+        }
+
+        /* Staggered delays using nth-child (No JS needed) */
+        .skill-card:nth-child(1) { animation-delay: 0.1s; }
+        .skill-card:nth-child(2) { animation-delay: 0.2s; }
+        .skill-card:nth-child(3) { animation-delay: 0.3s; }
+        .skill-card:nth-child(4) { animation-delay: 0.4s; }
+        .skill-card:nth-child(5) { animation-delay: 0.5s; }
+        .skill-card:nth-child(6) { animation-delay: 0.6s; }
+        .skill-card:nth-child(7) { animation-delay: 0.7s; }
+        .skill-card:nth-child(8) { animation-delay: 0.8s; }
+
+        .skill-card:hover {
+            border-color: var(--primary);
+            background: linear-gradient(145deg, var(--bg-light), #1e243d);
+            transform: translateY(-5px);
+        }
+        .skill-card i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ==========================
+           7. CERTIFICATES & PROJECTS
+           ========================== */
+        .projects-grid, .cert-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .card-box {
+            background: var(--bg-light); padding: 25px; border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
+            display: flex; flex-direction: column; justify-content: space-between;
+        }
+        .card-box:hover { transform: translateY(-5px); border-color: var(--accent); }
+        .card-box h3 { margin-bottom: 10px; color: #fff; font-size: 1.1rem; }
+        .card-box p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 5px; }
+        
+        .tech-stack span {
+            font-size: 0.75rem;
+            background: rgba(82, 113, 255, 0.1);
+            color: var(--accent);
+            padding: 4px 8px;
+            border-radius: 4px;
+            margin-right: 5px;
+        }
+
+        /* ==========================
+           8. CONTACT
+           ========================== */
+        .contact-content {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .contact-item {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        .contact-item i { color: var(--primary); margin-right: 10px; }
+
+        footer { text-align: center; padding: 40px; border-top: 1px solid #222; margin-top: 50px;}
+
+        /* ==========================
+           9. MOBILE RESPONSIVE (PURE CSS)
+           ========================== */
+        @media (max-width: 768px) {
+            .menu-icon { display: block; z-index: 2000; }
+            
+            /* Logic: When checkbox is checked, slide nav in */
+            .nav-links {
+                position: fixed; 
+                top: 0; 
+                right: -100%; /* Hidden */
+                width: 70%; 
+                height: 100vh;
+                background: var(--bg-light); 
+                flex-direction: column; 
+                align-items: center;
+                padding-top: 80px; 
+                transition: 0.4s;
+                box-shadow: -5px 0 10px rgba(0,0,0,0.5);
+            }
+
+            /* The Selector Magic */
+            #nav-toggle:checked ~ .nav-links {
+                right: 0;
+            }
+
+            .hero h1 { font-size: 2.2rem; }
+            .stats { gap: 20px; }
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container nav-wrapper">
+            <a href="#" class="logo">Sri<span style="color:white">Midhuna.</span></a>
+            
+            <!-- CSS Checkbox Hack for Menu -->
+            <input type="checkbox" id="nav-toggle">
+            <label for="nav-toggle" class="menu-icon"><i class="fas fa-bars"></i></label>
+
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#certificates">Certificates</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <div class="hero-content animate-load">
+            <h3>Hello, I'm</h3>
+            <h1>Sri Midhuna <span style="color: var(--primary)">S K</span></h1>
+            <p>AI Engineer | Machine Learning Engineer | Data Scientist</p>
+            <p style="font-size: 0.9rem; margin-top: -20px;">Building scalable systems and high-performance AI-powered web products.</p>
+            
+            <div class="social-icons" style="margin-bottom: 30px;">
+                <a href="https://github.com/srimidhuna" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/sri-midhuna-s-k" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://leetcode.com/u/SriMidhuna/" target="_blank"><i class="fas fa-code"></i></a>
+            </div>
+
+            <a href="#projects" class="btn">View My Work</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="section-header">
+                <span>Profile Summary</span>
+                <h2>About Me</h2>
+            </div>
+            <div class="about-container">
+                <div class="about-text">
+                    <h3>AI-Focused Computer Science Engineer</h3>
+                    <p>I am an undergraduate student at Bannari Amman Institute of Technology with a strong foundation in Machine Learning, Deep Learning, and AI-driven application development.</p>
+                    <p>My expertise bridges the gap between research and production, combining React+TypeScript frontends with Python-based ML pipelines. I am actively targeting roles in AI Engineering and Data Science at global product companies.</p>
+                    
+                    <div class="stats">
+                        <div class="stat-box"><h4>8.43</h4><p>CGPA</p></div>
+                        <div class="stat-box"><h4>3+</h4><p>Key Projects</p></div>
+                        <div class="stat-box"><h4>9+</h4><p>Certifications</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills">
+        <div class="container">
+            <div class="section-header">
+                <span>My Expertise</span>
+                <h2>Core Technical Skills</h2>
+            </div>
+            <div class="skills-grid">
+                <div class="skill-card"><i class="fab fa-python"></i><h3>Python</h3></div>
+                <div class="skill-card"><i class="fas fa-brain"></i><h3>Machine Learning</h3></div>
+                <div class="skill-card"><i class="fas fa-network-wired"></i><h3>Deep Learning</h3></div>
+                <div class="skill-card"><i class="fab fa-react"></i><h3>React & TS</h3></div>
+                <div class="skill-card"><i class="fas fa-database"></i><h3>SQL & MySQL</h3></div>
+                <div class="skill-card"><i class="fab fa-java"></i><h3>Java</h3></div>
+                <div class="skill-card"><i class="fab fa-cuttlefish"></i><h3>C / C++</h3></div>
+                <div class="skill-card"><i class="fas fa-layer-group"></i><h3>TensorFlow</h3></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section id="projects" style="background: #0e111e;">
+        <div class="container">
+            <div class="section-header">
+                <span>Portfolio</span>
+                <h2>Key Projects</h2>
+            </div>
+            <div class="projects-grid">
+                
+                <!-- Project 1 -->
+                <div class="card-box">
+                    <div>
+                        <h3>StanFX – AI Image Editor</h3>
+                        <p>A high-performance browser-based editor. Integrated Generative AI (Gemini, Stable Diffusion) for text-to-image and smart editing.</p>
+                    </div>
+                    <div class="tech-stack">
+                        <span>React</span><span>TypeScript</span><span>Generative AI</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="card-box">
+                    <div>
+                        <h3>Intel Image Classification</h3>
+                        <p>Designed and trained a CNN-based model to categorize natural scenes into 6 classes. Deployed via Hugging Face.</p>
+                    </div>
+                    <div class="tech-stack">
+                        <span>Deep Learning</span><span>CNN</span><span>Computer Vision</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="card-box">
+                    <div>
+                        <h3>AQI Prediction System</h3>
+                        <p>End-to-end ML pipeline predicting air quality. Used GridSearchCV for optimization and Streamlit for deployment.</p>
+                    </div>
+                    <div class="tech-stack">
+                        <span>Scikit-Learn</span><span>Streamlit</span><span>Data Science</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates -->
+    <section id="certificates">
+        <div class="container">
+            <div class="section-header">
+                <span>Credentials</span>
+                <h2>Certifications</h2>
+            </div>
+            <div class="cert-grid">
+                <!-- 1 -->
+                <div class="card-box">
+                    <i class="fas fa-cloud" style="color:var(--accent); float:right;"></i>
+                    <h3>OCI Foundations</h3>
+                    <p>Oracle Cloud Infrastructure</p>
+                </div>
+                <!-- 2 -->
+                <div class="card-box">
+                    <i class="fas fa-brain" style="color:var(--accent); float:right;"></i>
+                    <h3>OCI AI Foundations</h3>
+                    <p>Oracle Cloud Infrastructure</p>
+                </div>
+                <!-- 3 -->
+                <div class="card-box">
+                    <i class="fas fa-chart-line" style="color:var(--accent); float:right;"></i>
+                    <h3>Google Analytics</h3>
+                    <p>Google</p>
+                </div>
+                <!-- 4 -->
+                <div class="card-box">
+                    <i class="fas fa-robot" style="color:var(--accent); float:right;"></i>
+                    <h3>Elements of AI</h3>
+                    <p>MinnaLearn</p>
+                </div>
+                <!-- 5 -->
+                <div class="card-box">
+                    <i class="fab fa-python" style="color:var(--accent); float:right;"></i>
+                    <h3>Python (Basic)</h3>
+                    <p>HackerRank</p>
+                </div>
+                <!-- 6 -->
+                <div class="card-box">
+                    <i class="fas fa-database" style="color:var(--accent); float:right;"></i>
+                    <h3>SQL (Basic)</h3>
+                    <p>HackerRank</p>
+                </div>
+                <!-- 7 -->
+                <div class="card-box">
+                    <i class="fas fa-award" style="color:#cd7f32; float:right;"></i>
+                    <h3>Bronze Badge - Python</h3>
+                    <p>Coding Platform</p>
+                </div>
+                <!-- 8 -->
+                <div class="card-box">
+                    <i class="fas fa-award" style="color:#cd7f32; float:right;"></i>
+                    <h3>Bronze Badge - Java</h3>
+                    <p>Coding Platform</p>
+                </div>
+                <!-- 9 -->
+                <div class="card-box">
+                    <i class="fas fa-award" style="color:#c0c0c0; float:right;"></i>
+                    <h3>Silver Badge - C</h3>
+                    <p>Coding Platform</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" style="background: #0e111e;">
+        <div class="container">
+            <div class="section-header">
+                <span>Get In Touch</span>
+                <h2>Contact Me</h2>
+            </div>
+            <div class="contact-content">
+                <p style="color: #a0a6b1; margin-bottom: 30px;">
+                    I am interested in opportunities in Applied AI, ML Engineering, and Data Science.
+                </p>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i> srimidhuna19@gmail.com
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i> +91-9360275150
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i> Tamil Nadu, India
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Sri Midhuna S K. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
